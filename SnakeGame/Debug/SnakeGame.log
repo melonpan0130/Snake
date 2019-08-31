@@ -1,0 +1,10 @@
+﻿  SnakeGame.cpp
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(86,57): warning C4244:  '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(86,39): warning C4244:  '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(92,14): warning C4244:  '초기화 중': 'ULONGLONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(93,17): warning C4244:  '초기화 중': 'ULONGLONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(106,27): warning C4244:  '=': 'ULONGLONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(113,30): warning C4244:  '=': 'ULONGLONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(130,60): warning C4244:  '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\EunJu\Desktop\SnakeGame\SnakeGame\SnakeGame.cpp(130,42): warning C4244:  '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SnakeGame.vcxproj -> C:\Users\EunJu\Desktop\SnakeGame\Debug\SnakeGame.exe
