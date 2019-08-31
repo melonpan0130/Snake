@@ -32,12 +32,12 @@ D3DCOLOR g_ClearColor = D3DCOLOR_XRGB(0, 0, 255); // 컬러키 생성
 LPD3DXSPRITE g_Sprite;
 LPDIRECT3DTEXTURE9 g_Texture;
 
-D3DXVECTOR3 g_Pos = D3DXVECTOR3(100, 100, 0);
+D3DXVECTOR3 HeadPos = D3DXVECTOR3(100, 100, 0);
 D3DXVECTOR3 g_Dir = D3DXVECTOR3(1, 0, 0);
 D3DXVECTOR3 g_BlockPos;
 
-D3DXVECTOR3 g_PosTail[100];
-D3DXVECTOR3 g_DirTail[100];
+D3DXVECTOR3 g_BodyPos[100];
+D3DXVECTOR3 g_BodyDir[100];
 int g_TailIndex = 0;
 int g_turn = 0;
 
@@ -88,7 +88,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 	ZeroMemory(&msg, sizeof(msg)); // &msg 위치에 msg크기만큼 0으로 초기화
 
-	g_PosTail[0] = D3DXVECTOR3(100, 100, 0);
+	g_BodyPos[0] = D3DXVECTOR3(100, 100, 0);
 	float start = GetTickCount64();
 	float turnTime = GetTickCount64();
 	while(msg.message != WM_QUIT)
@@ -100,13 +100,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			g_Pos = g_Pos + g_Dir;
+			HeadPos = HeadPos + g_Dir;
 
 			if (turnTime - start > 2000) {
 				start = GetTickCount64();
 				if (g_turn > g_TailIndex)
 					g_turn = 0;
-				g_DirTail[g_turn] = g_DirTail[g_turn - 1];
+				g_BodyDir[g_turn] = g_BodyDir[g_turn - 1];
 				g_turn++;
 			}
 			else {
@@ -115,17 +115,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 			for (int i = 0; i <= g_TailIndex; i++) {
 				if (i == 0) {
-					g_PosTail[i] = g_Pos - g_Dir * 20;
-					g_DirTail[i] = g_Dir;
+					g_BodyPos[i] = HeadPos - g_Dir * 20;
+					g_BodyDir[i] = g_Dir;
 				}
 				else {
-					g_PosTail[i] = g_PosTail[i - 1] - g_Dir * 20;
+					g_BodyPos[i] = g_BodyPos[i - 1] - g_Dir * 20;
 					
 				}
 			}
 
-			if (g_BlockPos.x - 20.f < g_Pos.x && g_Pos.x < g_BlockPos.x + 20.f
-				&& g_BlockPos.y - 20.f < g_Pos.y && g_Pos.y < g_BlockPos.y + 20.f) {
+			if (g_BlockPos.x - 20.f < HeadPos.x && HeadPos.x < g_BlockPos.x + 20.f
+				&& g_BlockPos.y - 20.f < HeadPos.y && HeadPos.y < g_BlockPos.y + 20.f) {
 				// g_ClearColor = D3DCOLOR_XRGB(0, 255, 0);
 				g_BlockPos = D3DXVECTOR3(rand() % 32 * 20, rand() % 24 * 20, 0);
 				g_TailIndex ++;
@@ -134,15 +134,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
  			else
 				g_ClearColor = D3DCOLOR_XRGB(0, 0, 255);
 
-			if (g_Pos.x > 640.f - 10.f)
-				g_Pos.x = 640.f - 10.f;
-			else if (g_Pos.x < 10.f)
-				g_Pos.x = 10.f;
+			if (HeadPos.x > 640.f - 10.f)
+				HeadPos.x = 640.f - 10.f;
+			else if (HeadPos.x < 10.f)
+				HeadPos.x = 10.f;
 
-			if (g_Pos.y > 480.f - 10.f)
-				g_Pos.y = 480.f - 10.f;
-			else if (g_Pos.y < 10.f)
-				g_Pos.y = 10.f;
+			if (HeadPos.y > 480.f - 10.f)
+				HeadPos.y = 480.f - 10.f;
+			else if (HeadPos.y < 10.f)
+				HeadPos.y = 10.f;
 
 			Render();
 		}
@@ -322,10 +322,10 @@ void Render()
 
 		// Sprite 그리기
 		
-		DrawSprite(center, g_Pos); // pc
+		DrawSprite(center, HeadPos); // pc
 		if (g_TailIndex >= 0)
 			for (int i = 0; i <= g_TailIndex; i++)
-				DrawSprite(center, g_PosTail[i]); // pc
+				DrawSprite(center, g_BodyPos[i]); // pc
 
 		DrawSprite(center, g_BlockPos); // apple
 
